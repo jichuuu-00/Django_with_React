@@ -10,17 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+
+# reading .env file
+environ.Env.read_env(
+    env_file= os.path.join(BASE_DIR, '.env') # BASE_DIR를 선언한 코드 아래에 이 코드가 있어야함
+)
+
+SECRET_KEY = env('SECRET_KEY')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!n)9w4z)zrg*hl2(f)*us*=j+-mwh7p9x%xr@vam%)8b3uf50^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
