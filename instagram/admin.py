@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Post
+from .models import Post, Comment
 
 @admin.register(Post) # Wrapping 감싼 대상의 기능을 변강할 수 있음
 class PostAdmin(admin.ModelAdmin):
@@ -18,3 +18,7 @@ class PostAdmin(admin.ModelAdmin):
     # 매번 post 객첵가 넘어옴 admin이 알아서 호출
     def message_length(self, post):
         return f"{len(post.message)} 글자"
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
